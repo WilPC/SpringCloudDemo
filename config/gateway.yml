@@ -1,0 +1,25 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: mms_route
+          # lb 是 Spring 提供用來做 Loadbalance 用的
+          uri: lb://${MMS_SERVICE_HOST_NAME:MMS}
+          # mapping path
+          predicates:
+            - Path=/get/**
+          # filter request header and rewrite path
+          filters:
+            - AddRequestHeader=X-Request-Id, 1024
+            - RewritePath=/get/(?<segment>.*), /${segment}
+        - id: middleware_route
+          uri: lb://${MIDDLEWARE_SERVICE_HOST_NAME:MIDDLEWARE}
+          predicates:
+            - Path=/middleware/**

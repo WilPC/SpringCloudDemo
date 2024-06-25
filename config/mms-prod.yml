@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: mms
+server:
+  port: 10211
+#  datasource:
+#    url: jdbc:sqlserver://localhost:1433;databaseName=member
+#    username:
+#    password:
+mms:
+  welcomeStr: "Welcome to MMS PROD"

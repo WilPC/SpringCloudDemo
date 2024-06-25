@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: middleware
+server:
+  port: 8311
+#  datasource:
+#    url: jdbc:sqlserver://localhost:1433;databaseName=member
+#    username:
+#    password:

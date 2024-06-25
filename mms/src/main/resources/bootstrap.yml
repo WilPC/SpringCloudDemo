@@ -1,0 +1,24 @@
+spring:
+  config:
+    # 這個是 Springboot 2.4 之後需要增加的設定值，否則會錯誤
+    import: "optional:configserver:"
+  cloud:
+    config:
+      # 以下會組成 URI => http://localhost:8200/main/player/dev
+      # Branch 名稱
+      label: ${CONFIG_LABEL:main}
+      # 設定檔名稱
+      name: ${CONFIG_NAME:mms}
+      # 後綴環境名稱
+      profile: ${CONFIG_PROFILE:dev}
+      # Config Server 位置
+      uri: http://localhost:8200
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8700/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
